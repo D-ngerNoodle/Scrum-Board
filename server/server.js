@@ -11,9 +11,32 @@ const pool = new Pool({
   connectionString,
 });
 
+// const user_id = 1;
+// const name = 'My Project';
+
+// const query = {
+//   text: 'INSERT INTO projects (user_id, name) VALUES ($1, $2)',
+//   values: [user_id, name],
+// };
+
+// pool.query(query)
+//   .then(() => {
+//     console.log('Project added.');
+//     pool.end();
+//   })
+//   .catch((err) => console.error(err));
+
+
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Serve index.html on root
 app.get('/', (req, res) => {
@@ -135,6 +158,30 @@ app.get('/tasks/:id', (req, res) => {
     }
   );
 });
+
+//put: updates title/body on projects
+app.put('/projects')
+//put: updates title/body on tasks
+//post: handles adding new project
+//post: handles adding new task
+//delete: handles deleting project
+app.delete('/projects/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    console.log('hi');
+    const result = await pool.query('DELETE FROM projects WHERE id = $1', [id]);
+    if (result.rowCount === 0) {
+      res.status(404).send(`Project with ID ${id} not found`);
+    } else {
+      res.status(204).send();
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error deleting project');
+  }
+});
+//delete: handles deleting task
+
 
 app.listen(3000, () => {
   console.log(`Server listening on port 3000`);

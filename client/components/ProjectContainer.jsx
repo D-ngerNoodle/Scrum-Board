@@ -23,8 +23,9 @@ export const ProjectContainer = () => {
 
   // populate array of projects
   const initializeArr = () => {
+    console.log('userProjects: ', userProjects);
     const result = userProjects.map(project => ({
-      id: uuid(),
+      id: project.id,
       content: project.name,
     }));
     console.log('this is result in initialize arr: ', result);
@@ -104,13 +105,36 @@ export const ProjectContainer = () => {
     setItems(updatedItems);
   }
 
-  const handleAddProject = () => {
-    const newProject = {
-      id: uuid(), // generate a unique ID for the new project
-      content: `Project ${items.length + 1}`,
+  const handleAddProject = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/projects/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "user_id": "5",
+          "name": `Project ${items.length + 1}`
+        })
+      });
+      if (response.ok) {
+        // console.log('hi');
+        
+      } else {
+        throw new Error('Failed to add item to database');
+      }
+    } catch (error) {
+      console.error(error);
     };
-    const updatedItems = [...items, newProject]; // add the new project to the items array
-    setItems(updatedItems);
+
+    initializeArr();
+    // const newProject = {
+    //   id: uuid(), // generate a unique ID for the new project
+    //   content: `Project ${items.length + 1}`,
+    // };
+    // const updatedItems = [...items, newProject]; // add the new project to the items array
+    // setItems(updatedItems);
+
   };
 
   return (
