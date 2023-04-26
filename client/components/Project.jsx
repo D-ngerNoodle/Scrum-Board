@@ -44,6 +44,7 @@ export const Project = ({ content, items, setItems, index, id }) => {
   return (
     <div className="projectContainer">
       <div className="projectContent">
+        {/* double click on text to edit */}
         {toggleTitle ? (
           <p
             onDoubleClick={() => {
@@ -59,6 +60,8 @@ export const Project = ({ content, items, setItems, index, id }) => {
             onChange={event => {
               setTaskTitle(event.target.value);
             }}
+            // potential future change for an update request to backend to ensure new project titles are saved
+            //below vvv
             onBlur={() => {
               setToggleTitle(true);
               updateName();
@@ -74,7 +77,7 @@ export const Project = ({ content, items, setItems, index, id }) => {
           />
         )}
       </div>
-
+          {/* delete button, it works! */}
       <div>
         <button
           type="button"
