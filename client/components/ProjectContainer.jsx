@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid'; // creat unique id
 
 export const ProjectContainer = () => {
   //userProjects and userTasks holds all project data and task data respectively
-  const { userProjects, userTasks, setUserProjects } = useContext(ProjectContext);
+  const { userProjects, userTasks, renderState,  setRenderState } = useContext(ProjectContext);
 
   const test = [
     {
@@ -23,7 +23,6 @@ export const ProjectContainer = () => {
 
   // populate array of projects
   const initializeArr = () => {
-    if (!userProjects) return [];
     console.log('userProjects: ', userProjects);
     const result = userProjects.map(project => ({
       id: project.id,
@@ -108,7 +107,7 @@ export const ProjectContainer = () => {
   }
 
   // adds new project to database
-  // ERRORS: 
+  // ERRORS: need to somehow 
   const handleAddProject = async () => {
     try {
       const response = await fetch(`http://localhost:3000/projects/`, {
@@ -123,13 +122,14 @@ export const ProjectContainer = () => {
         })
       });
       if (response.ok) {
-            const newProject = {
-      user_id: '5', // generate a unique ID for the new project
-      content: `Project ${items.length + 1}`,
-      
-    };
-    const updatedItems = [...items, newProject]; // add the new project to the items array
-    setUserProjects(updatedItems);
+       (renderState ? setRenderState(false) : setRenderState(true));
+    //         const newProject = {
+    //   user_id: 5, 
+    //   name: `Project ${items.length + 1}`,
+    //   // id: **need to grab new project id, but that requires context to rerender, not sure how to get that to happen without infinite loop**
+    // };
+    // const updatedItems = [...userProjects, newProject]; // add the new project to the items array
+    // setUserProjects(updatedItems);
       } else {
         throw new Error('Failed to add item to database');
       }

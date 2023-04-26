@@ -17,6 +17,7 @@ const ProjectContextProvider = ({ children }) => {
     { id: 1, content: 'scrum board' },
   ]);
   const [userTasks, setUserTasks] = useState([]);
+  const [renderState, setRenderState] = useState(false);
 
   //runs only on first render
   useEffect(() => {
@@ -58,10 +59,10 @@ const ProjectContextProvider = ({ children }) => {
     };
     fetchUserProjects();
     fetchUserTasks();
-  }, []);
+  }, [renderState]);
 
   return (
-    <ProjectContext.Provider value={{ userProjects, userTasks, setUserProjects }}>
+    <ProjectContext.Provider value={{ userProjects, userTasks, renderState, setRenderState }}>
       {children}
     </ProjectContext.Provider>
   );

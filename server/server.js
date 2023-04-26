@@ -161,13 +161,15 @@ app.put('/projects/:id', async (req, res) => {
     res.status(500).send('Error updating project');
   }
 })
+
 // Updates title/body on a task
+// not sure how tasks will be implemented yet
 app.put('/tasks/:id', async (req, res) => {
   const id = req.params.id;
   const newName = req.body.name;
   const newBody = req.body.body
   try {
-    const result = await pool.query('UPDATE projects SET name = $1, body = $2 WHERE id = $2', [newName,, newBody, id]);
+    const result = await pool.query('UPDATE tasks SET task_name = $1, description = $2 WHERE id = $2', [newName, newBody, id]);
     if (result.rowCount === 0) {
       res.status(404).send(`Task with ID ${id} not found`);
     } else {
@@ -179,7 +181,6 @@ app.put('/tasks/:id', async (req, res) => {
     res.status(500).send('Error updating task');
   }
 })
-// Adds new task
 
 // Deletes project
 app.delete('/projects/:id', async (req, res) => {
@@ -200,7 +201,22 @@ app.delete('/projects/:id', async (req, res) => {
 });
 
 // Deletes task
+app.delete('/tasks/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await pool.query('DELETE FROM tasks WHERE id = $1', [id]);
+    if (result.rowCount === 0) {
+      res.status(404).send(`Project with ID ${id} not found`);
+    } else {
+      res.set('Access-Control-Allow-Origin', '*');
+      res.status(204).send();
 
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error deleting project');
+  }
+});
 
 app.listen(3000, () => {
   console.log(`Server listening on port 3000`);
