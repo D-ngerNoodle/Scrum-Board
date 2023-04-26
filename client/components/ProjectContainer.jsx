@@ -10,8 +10,7 @@ import { v4 as uuid } from 'uuid'; // create unique id
 
 export const ProjectContainer = () => {
   //userProjects and userTasks holds all project data and task data respectively
-  //we can update the below line to remove userTasks since this is not utilized within this component
-  const { userProjects, userTasks } = useContext(ProjectContext);
+  const { userProjects, userTasks, renderState,  setRenderState } = useContext(ProjectContext);
 
   const test = [
     {
@@ -36,9 +35,10 @@ export const ProjectContainer = () => {
 
   // populate array of projects
   const initializeArr = () => {
+    console.log('userProjects: ', userProjects);
     const result = userProjects.map(project => ({
-      //we don't need to reassign the id with uuid, we can just utilize it's primary key
-      id: uuid(),
+      id: project.id,
+      dId: uuid(),
       content: project.name,
     }));
     // result = {id: , content: }
@@ -115,18 +115,43 @@ export const ProjectContainer = () => {
   }
 
 
-  const handleAddProject = () => {
-
-    //creating a new project object
-    const newProject = {
-      id: uuid(), // generate a unique ID for the new project
-      content: `Project ${items.length + 1}`,
+  // adds new project to database
+  // ERRORS: need to somehow 
+  const handleAddProject = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/projects/`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "user_id": "5",
+          "name": `Project ${items.length + 1}`
+        })
+      });
+      if (response.ok) {
+       (renderState ? setRenderState(false) : setRenderState(true));
+    //         const newProject = {
+    //   user_id: 5, 
+    //   name: `Project ${items.length + 1}`,
+    //   // id: **need to grab new project id, but that requires context to rerender, not sure how to get that to happen without infinite loop**
+    // };
+    // const updatedItems = [...userProjects, newProject]; // add the new project to the items array
+    // setUserProjects(updatedItems);
+      } else {
+        throw new Error('Failed to add item to database');
+      }
+    } catch (error) {
+      console.error(error);
     };
 
-    //somewhere in *here* we may need to input a post request in order to send this project to the database
-
-    const updatedItems = [...items, newProject]; // add the new project to the items array
-    setItems(updatedItems);
+    // const newProject = {
+    //   id: uuid(), // generate a unique ID for the new project
+    //   content: `Project ${items.length + 1}`,
+    // };
+    // const updatedItems = [...items, newProject]; // add the new project to the items array
+    // setItems(updatedItems);
   };
 
   return (
@@ -228,8 +253,8 @@ export const ProjectContainer = () => {
                 >
                   {items.map((item, index) => (
                     <Draggable
-                      key={item.id}
-                      draggableId={item.id}
+                      key={item.dId}
+                      draggableId={item.dId}
                       index={index}
                     >
                       {(provided, snapshot) => (
@@ -274,9 +299,9 @@ export const ProjectContainer = () => {
         </div>
         <button
           style={{ width: '100px', height: '50px', marginTop: '2rem' }}
-          onClick={() => {
-            setItems(handleAddProject);
-          }}
+          onClick={
+            handleAddProject
+          }
         >
           New Project
         </button>

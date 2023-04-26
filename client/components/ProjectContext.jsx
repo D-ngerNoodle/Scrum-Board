@@ -19,6 +19,7 @@ const ProjectContextProvider = ({ children }) => {
     { id: 1, content: 'scrum board' },
   ]);
   const [userTasks, setUserTasks] = useState([]);
+  const [renderState, setRenderState] = useState(false);
 
   //runs only after first render due to the empty array [] in the second arguement;
   useEffect(() => {
@@ -63,10 +64,10 @@ const ProjectContextProvider = ({ children }) => {
     };
     fetchUserProjects();
     fetchUserTasks();
-  }, []);
+  }, [renderState]);
 
   return (
-    <ProjectContext.Provider value={{ userProjects, userTasks }}>
+    <ProjectContext.Provider value={{ userProjects, userTasks, renderState, setRenderState }}>
       {children}
     </ProjectContext.Provider>
   );
