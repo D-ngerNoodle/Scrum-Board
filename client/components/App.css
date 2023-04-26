@@ -1,7 +1,7 @@
-* {
+/* * {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   font-weight: 500;
-}
+} */
 
 body {
   background-color: rgb(76, 72, 87);
@@ -28,6 +28,7 @@ body {
 }
 
 .currentProject {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   color: rgba(255, 255, 255, 0.929);
   display: flex;
   align-items: center;
@@ -185,8 +186,10 @@ body {
   flex-direction: row;
   align-items: center;
 }
+
+
 .projectName {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1rem;
   /* margin: 0.5rem; */
   /* padding: 0.5rem; */

@@ -153,6 +153,7 @@ export const ProjectContainer = () => {
             <Droppable droppableId="droppable">
               {(provided, snapshot) => (
                 <div
+                  className='allProjects'
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   style={getListStyle(snapshot.isDraggingOver)}
@@ -165,6 +166,7 @@ export const ProjectContainer = () => {
                     >
                       {(provided, snapshot) => (
                         <div
+                          className='singleProjectUnit'
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
@@ -174,6 +176,7 @@ export const ProjectContainer = () => {
                           )}
                         >
                           <Project
+                            className='Project'
                             key={index}
                             items={items}
                             setItems={setItems}
