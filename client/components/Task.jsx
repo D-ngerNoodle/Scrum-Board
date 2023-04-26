@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 
-const Task = ({ content, state, setState, ind, index }) => {
+//this is the doubleclick/deletebutton
+
+const Task = ({ content, state, setState, ind, index, taskName, status }) => {
   // hooks for title text edit field
   const [toggleTitle, setToggleTitle] = useState(true);
-  const [taskTitle, setTaskTitle] = useState('Title');
+  const [taskTitle, setTaskTitle] = useState(taskName);
   // hooks for body text edit field
   const [toggleBody, setToggleBody] = useState(true);
   const [taskBody, setTaskBody] = useState('Body');
 
   return (
-    <article className="taskBox">
-      <div className="content">
+    <article className="taskBox@">
+      <div className="content@">
         {/* click to edit field for task title */}
         {toggleTitle ? (
           <p
