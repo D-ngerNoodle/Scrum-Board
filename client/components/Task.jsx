@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Task.css';
 
 //this is the doubleclick/deletebutton
 
@@ -72,8 +71,13 @@ const Task = ({ content, state, setState, ind, index, taskName, status }) => {
           />
         )}
       </div>
-      <div className="btn-container@">
-        <button
+      <div className="btn-container">
+      <button className='deleteButton'
+          onClick={() => {
+            setItems(items.filter(el => el.id != id));
+          }}
+          ><i class="fa fa-trash" style={{ fontSize: '1.5rem' }}></i></button>
+        {/* <button
           type="button"
           onClick={() => {
             const newState = [...state];
@@ -82,7 +86,7 @@ const Task = ({ content, state, setState, ind, index, taskName, status }) => {
           }}
         >
           delete
-        </button>
+        </button> */}
       </div>
     </article>
   );

@@ -43,11 +43,7 @@ const TaskColumn = ({ taskInfo, id, name }) => {
   return (
     <div className="@column">
       <div>{name}</div>
-
-      <div
-        className="tasksBox"
-        style={{ maxHeight: 400, overflowY: 'auto' }}
-      >
+      <div className="tasksBox">
         {tasks}
       </div>
 

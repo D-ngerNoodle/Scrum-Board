@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './TaskContainer.css';
 import TaskColumn from './TaskColumn.jsx';
 import Task from './Task.jsx';
 import {
@@ -125,10 +124,10 @@ export const TaskContainer = ({ project }) => {
   // };
 
   return (
-    <div style={{ background: '#577D86', height: '100vh' }}>
+    <div className='TaskContainer'>
       <div className="taskColumns-container ">
-        <div className="projectName">Current Project</div>
-        <div className="columnNamesRow">
+        <div className="currentProject">Current Project</div>
+        <div className="colunmNamesRow">
           <div>New</div>
           <div>In Progress</div>
           <div>Completed</div>
@@ -181,7 +180,7 @@ export const TaskContainer = ({ project }) => {
         <div className="buttonRow">
           <div>
             <button
-              style={{ width: '100px', height: '50px', marginTop: '2rem' }}
+              className='newTaskButton'
               onClick={() => {
                 const items = state[0];
                 const newTask = {

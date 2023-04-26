@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Project.css';
 
 export const Project = ({ content, items, setItems, index, id }) => {
   const [toggleTitle, setToggleTitle] = useState(true);
@@ -43,8 +42,7 @@ export const Project = ({ content, items, setItems, index, id }) => {
 
   return (
     <div className="projectContainer">
-      <div className="projectContent">
-        {/* double click on text to edit */}
+      <div className="projectName">
         {toggleTitle ? (
           <p
             onDoubleClick={() => {
@@ -79,7 +77,10 @@ export const Project = ({ content, items, setItems, index, id }) => {
       </div>
           {/* delete button, it works! */}
       <div>
-        <button
+        <button className='deleteButton'
+          onClick={deleteItem}
+          ><i class="fa fa-trash" style={{ fontSize: '1.5rem' }}></i></button>
+        {/* <button className='deleteButton'
           type="button"
           onClick={ 
           //   () => {
@@ -89,8 +90,8 @@ export const Project = ({ content, items, setItems, index, id }) => {
              deleteItem
           }
         >
-          Delete
-        </button>
+          X
+        </button> */}
       </div>
     </div>
   );

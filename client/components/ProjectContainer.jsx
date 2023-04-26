@@ -74,13 +74,16 @@ export const ProjectContainer = () => {
   const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
     userSelect: 'none',
-    padding: grid * 2,
+    padding: grid * 1,
     margin: `0 0 ${grid}px 0`,
     display: 'flex',
     justifyContent: 'space-between',
+    border: 'solid black 1px',
+    borderRadius: '6px',
+    // alignItems: 'center',
 
     // change background colour if dragging
-    background: isDragging ? '#87CBB9' : 'whitesmoke',
+    background: isDragging ? '#EBC1EE' : 'whitesmoke',
 
     // styles we need to apply on draggables
     ...draggableStyle,
@@ -88,9 +91,9 @@ export const ProjectContainer = () => {
 
   //more drag n drop styling, changes dropable area to light blue
   const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightblue',
+    // background: isDraggingOver ? 'red' : 'lightblue',
     padding: grid,
-    width: '300px',
+    width: '280px',
   });
 
   // the list of projects
@@ -155,65 +158,20 @@ export const ProjectContainer = () => {
   };
 
   return (
-    <div style={{ background: '#577D86', height: '100vh' }}>
-      <div
-        className="outer"
-        style={{
-          // border: '1px solid black',
-          // width: '300px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <div
-          className="topBarContainer"
-          style={{
-            display: 'flex',
-            width: '300px',
-          }}
-        >
-          {/* <div className="topLeftContainer">        
-            </div> */}
-          <div
-            className="topLeftContainer"
-            style={{
-              flex: '1',
-              height: '100%',
-              // border: '3px solid red',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              alignContent: 'center',
-              paddingBlock: '1rem',
-            }}
-          >
+    <div className='ProjectContainer'>
+      <div className="outer">
+        <div className="topBarContainer">
+          <div className='topLeftContainer'>
             <div
               id="image-container"
-              style={{
-                width: '80px',
-                height: '80px',
-                borderRadius: '50%',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                background: 'whitesmoke',
-                // border: '3px solid black',
-                marginBottom: '1rem',
-              }}
+              className='image-container'
             ></div>
             <div>User</div>
-            {/* update avatar */}
-            <form style={{ textAlign: 'center' }}>
+            <form className='form'>
               <input
                 type="file"
                 id="image-upload"
-                style={{
-                  alignContent: 'center',
-                  justifyContent: 'center',
-                  marginInline: '20%',
-                }}
-                // this is where you can update the image photo for your user
+                className='image-input'
                 onChange={event => {
                   const file = event.target.files[0];
                   if (file) {
@@ -231,22 +189,12 @@ export const ProjectContainer = () => {
           </div>
         </div>
 
-        <div
-          className="projectContainer"
-          style={{
-            overflowY: 'auto',
-            maxHeight: '400px',
-            // width: '450px',
-
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}
-        >
+        <div className="project_Container">
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="droppable">
               {(provided, snapshot) => (
                 <div
+                  className='allProjects'
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   style={getListStyle(snapshot.isDraggingOver)}
@@ -259,6 +207,7 @@ export const ProjectContainer = () => {
                     >
                       {(provided, snapshot) => (
                         <div
+                          className='singleProjectUnit'
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
@@ -268,6 +217,7 @@ export const ProjectContainer = () => {
                           )}
                         >
                           <Project
+                            className='Project'
                             key={index}
                             items={items}
                             setItems={setItems}
@@ -298,10 +248,8 @@ export const ProjectContainer = () => {
           </DragDropContext>
         </div>
         <button
-          style={{ width: '100px', height: '50px', marginTop: '2rem' }}
-          onClick={
-            handleAddProject
-          }
+          className='newProjectBtn'
+          onClick={handleAddProject}
         >
           New Project
         </button>
