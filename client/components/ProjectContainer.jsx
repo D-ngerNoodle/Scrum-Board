@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid'; // creat unique id
 
 export const ProjectContainer = () => {
   //userProjects and userTasks holds all project data and task data respectively
-  const { userProjects, userTasks } = useContext(ProjectContext);
+  const { userProjects, userTasks, setUserProjects } = useContext(ProjectContext);
 
   const test = [
     {
@@ -23,9 +23,11 @@ export const ProjectContainer = () => {
 
   // populate array of projects
   const initializeArr = () => {
+    if (!userProjects) return [];
     console.log('userProjects: ', userProjects);
     const result = userProjects.map(project => ({
       id: project.id,
+      dId: uuid(),
       content: project.name,
     }));
     console.log('this is result in initialize arr: ', result);
@@ -105,10 +107,13 @@ export const ProjectContainer = () => {
     setItems(updatedItems);
   }
 
+  // adds new project to database
+  // ERRORS: 
   const handleAddProject = async () => {
     try {
       const response = await fetch(`http://localhost:3000/projects/`, {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -118,8 +123,13 @@ export const ProjectContainer = () => {
         })
       });
       if (response.ok) {
-        // console.log('hi');
-        
+            const newProject = {
+      user_id: '5', // generate a unique ID for the new project
+      content: `Project ${items.length + 1}`,
+      
+    };
+    const updatedItems = [...items, newProject]; // add the new project to the items array
+    setUserProjects(updatedItems);
       } else {
         throw new Error('Failed to add item to database');
       }
@@ -127,14 +137,12 @@ export const ProjectContainer = () => {
       console.error(error);
     };
 
-    initializeArr();
     // const newProject = {
     //   id: uuid(), // generate a unique ID for the new project
     //   content: `Project ${items.length + 1}`,
     // };
     // const updatedItems = [...items, newProject]; // add the new project to the items array
     // setItems(updatedItems);
-
   };
 
   return (
@@ -234,8 +242,8 @@ export const ProjectContainer = () => {
                 >
                   {items.map((item, index) => (
                     <Draggable
-                      key={item.id}
-                      draggableId={item.id}
+                      key={item.dId}
+                      draggableId={item.dId}
                       index={index}
                     >
                       {(provided, snapshot) => (
@@ -280,9 +288,9 @@ export const ProjectContainer = () => {
         </div>
         <button
           style={{ width: '100px', height: '50px', marginTop: '2rem' }}
-          onClick={() => {
-            setItems(handleAddProject);
-          }}
+          onClick={
+            handleAddProject
+          }
         >
           New Project
         </button>

@@ -11,21 +11,6 @@ const pool = new Pool({
   connectionString,
 });
 
-// const user_id = 1;
-// const name = 'My Project';
-
-// const query = {
-//   text: 'INSERT INTO projects (user_id, name) VALUES ($1, $2)',
-//   values: [user_id, name],
-// };
-
-// pool.query(query)
-//   .then(() => {
-//     console.log('Project added.');
-//     pool.end();
-//   })
-//   .catch((err) => console.error(err));
-
 
 // Body parser middleware
 app.use(express.json());
@@ -159,28 +144,62 @@ app.get('/tasks/:id', (req, res) => {
   );
 });
 
-//put: updates title/body on projects
-app.put('/projects')
-//put: updates title/body on tasks
-//post: handles adding new project
-//post: handles adding new task
-//delete: handles deleting project
+// Updates title for a project
+app.put('/projects/:id', async (req, res) => {
+  const id = req.params.id;
+  const newName = req.body.name;
+  try {
+    const result = await pool.query('UPDATE projects SET name = $1 WHERE id = $2', [newName, id]);
+    if (result.rowCount === 0) {
+      res.status(404).send(`Project with ID ${id} not found`);
+    } else {
+      res.set('Access-Control-Allow-Origin', '*');
+      res.status(200).send();
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating project');
+  }
+})
+// Updates title/body on a task
+app.put('/tasks/:id', async (req, res) => {
+  const id = req.params.id;
+  const newName = req.body.name;
+  const newBody = req.body.body
+  try {
+    const result = await pool.query('UPDATE projects SET name = $1, body = $2 WHERE id = $2', [newName,, newBody, id]);
+    if (result.rowCount === 0) {
+      res.status(404).send(`Task with ID ${id} not found`);
+    } else {
+      res.set('Access-Control-Allow-Origin', '*');
+      res.status(200).send();
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating task');
+  }
+})
+// Adds new task
+
+// Deletes project
 app.delete('/projects/:id', async (req, res) => {
   const id = req.params.id;
   try {
-    console.log('hi');
     const result = await pool.query('DELETE FROM projects WHERE id = $1', [id]);
     if (result.rowCount === 0) {
       res.status(404).send(`Project with ID ${id} not found`);
     } else {
+      res.set('Access-Control-Allow-Origin', '*');
       res.status(204).send();
+
     }
   } catch (error) {
     console.error(error);
     res.status(500).send('Error deleting project');
   }
 });
-//delete: handles deleting task
+
+// Deletes task
 
 
 app.listen(3000, () => {

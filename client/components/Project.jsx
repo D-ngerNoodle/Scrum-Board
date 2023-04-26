@@ -23,17 +23,23 @@ export const Project = ({ content, items, setItems, index, id }) => {
     }
   };
 
-  // updates project name on input change
-  const changeName = async () => {
-    // try {
-    //   const response = await fetch(`http://localhost:3000/projects/${id}`, {
-    //     method: 'PUT',
-    //   });
-    //   if (response.ok) {
-
-    //   }
-    // }
-  }
+  // updates project title
+  const updateName = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/projects/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: id, name: taskTitle }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update item in database');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="projectContainer">
@@ -55,12 +61,14 @@ export const Project = ({ content, items, setItems, index, id }) => {
             }}
             onBlur={() => {
               setToggleTitle(true);
+              updateName();
             }}
             onKeyDown={event => {
               if (event.key === 'Enter' || event.key === 'Escape') {
                 setToggleTitle(true);
                 event.preventDefault();
                 event.stopPropagation();
+                updateName();
               }
             }}
           />
