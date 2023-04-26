@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Task.css';
 
 const Task = ({ content, state, setState, ind, index }) => {
   // hooks for title text edit field
@@ -71,7 +70,12 @@ const Task = ({ content, state, setState, ind, index }) => {
         )}
       </div>
       <div className="btn-container">
-        <button
+      <button className='deleteButton'
+          onClick={() => {
+            setItems(items.filter(el => el.id != id));
+          }}
+          ><i class="fa fa-trash" style={{ fontSize: '1.5rem' }}></i></button>
+        {/* <button
           type="button"
           onClick={() => {
             const newState = [...state];
@@ -80,7 +84,7 @@ const Task = ({ content, state, setState, ind, index }) => {
           }}
         >
           delete
-        </button>
+        </button> */}
       </div>
     </article>
   );

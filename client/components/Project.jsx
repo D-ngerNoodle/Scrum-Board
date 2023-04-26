@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import './Project.css';
 
 export const Project = ({ content, items, setItems, index, id }) => {
   const [toggleTitle, setToggleTitle] = useState(true);
   const [taskTitle, setTaskTitle] = useState(content);
-  // console.log('props.id: ', props.id);
+
   return (
     <div className="projectContainer">
-      <div className="projectContent">
+      <div className="projectName">
         {toggleTitle ? (
           <p
             onDoubleClick={() => {
@@ -38,14 +37,19 @@ export const Project = ({ content, items, setItems, index, id }) => {
       </div>
 
       <div>
-        <button
+        <button className='deleteButton'
+          onClick={() => {
+            setItems(items.filter(el => el.id != id));
+          }}
+          ><i class="fa fa-trash" style={{ fontSize: '1.5rem' }}></i></button>
+        {/* <button className='deleteButton'
           type="button"
           onClick={() => {
             setItems(items.filter(el => el.id != id));
           }}
         >
-          Delete
-        </button>
+          X
+        </button> */}
       </div>
     </div>
   );

@@ -6,7 +6,6 @@ import './App.css';
 import { ProjectContext } from './ProjectContext.jsx';
 
 export const App = () => {
-  console.log('app.jsx here');
   return (
     <div className="container">
       <div>
