@@ -2,34 +2,36 @@ import React, { useState, useEffect, useContext } from 'react';
 // import Button from '@mui/material/Button';
 import { ProjectContext } from './ProjectContext.jsx';
 import Task from './Task.jsx';
-import './TaskColumn.css';
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-} from 'react-beautiful-dnd';
+// import {
+//   DragDropContext,
+//   Droppable,
+//   Draggable,
+// } from 'react-beautiful-dnd';
 
-const TaskColumn = ({ taskInfo, id, name }) => {
+const TaskColumn = ({ taskInfo, id, name, status}) => {
   //create local state for number of tasks
   const { userTasks } = useContext(ProjectContext);
-
   const [tasks, setTasks] = useState([]);
 
+  //console.log('userTasks: ', userTasks);
   //function to create a task when the new task button is clicked
   const taskCreator = () => {
     setTasks(
-      tasks.concat(<Task taskInfo={taskInfo} key={tasks.length} />)
+      tasks.concat(<Task taskInfo={taskInfo} tasks={userTasks} setTasks={setTasks} key={tasks.length} />)
     );
     // console.log('tasks is ', tasks);
   };
   
-  //
+  // we need this to render through a component; 
   const taskRender = () => {
     const taskList = [];
     for(let i = 0; i < userTasks.length; i++){
-      taskList.push(<Task taskName={userTasks[i].task_name} status={userTasks[i].status} key={i} />);
+      // if the current task status is equal to the specific column status
+      // push it to the current column
+      if(userTasks[i].status === status){
+      taskList.push(<Task taskName={userTasks[i].task_name} status={userTasks[i].status} tasks={userTasks} setTasks={setTasks} key={i} />)
+      };
     }
-  
     setTasks(taskList);
   };
 
@@ -41,7 +43,7 @@ const TaskColumn = ({ taskInfo, id, name }) => {
 
   // console.log('tasks is ', tasks);
   return (
-    <div className="@column">
+    <div className="column">
       <div>{name}</div>
       <div className="tasksBox">
         {tasks}
