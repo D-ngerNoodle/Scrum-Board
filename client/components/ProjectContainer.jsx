@@ -249,9 +249,7 @@ export const ProjectContainer = () => {
         </div>
         <button
           className='newProjectBtn'
-          onClick={() => {
-            setItems(handleAddProject);
-          }}
+          onClick={handleAddProject}
         >
           New Project
         </button>
