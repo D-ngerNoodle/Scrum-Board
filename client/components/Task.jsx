@@ -8,10 +8,10 @@ import {
 
 //this is the doubleclick/deletebutton
 
-const Task = ({ content, state, setState, index, taskName, status, id, key2 }) => {
+const Task = ({ content, state, setState, index, taskName, status, id, taskId}) => {
   const { userTasks, setUserTasks } = useContext(ProjectContext);
 
-  console.log(`keys are here `, key2)
+  //console.log(`keys are here `, taskID)
   // hooks for title text edit field
   const [toggleTitle, setToggleTitle] = useState(true);
   const [taskTitle = 'title', setTaskTitle] = useState(taskName);
@@ -20,7 +20,26 @@ const Task = ({ content, state, setState, index, taskName, status, id, key2 }) =
   //const [toggleBody, setToggleBody] = useState(true);
   //const [taskBody, setTaskBody] = useState('Body');
 
-  // console.log('task state in task comp is: ', tasks)
+  // handle delete task
+  function handleDeleteTask () {
+    fetch(`http://localhost:3000/tasks/${taskId}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        // remove the task from the tasks array
+        const updatedTasks = userTasks.filter(user => user.id !== taskId);
+        setUserTasks(updatedTasks);
+      } else {
+        throw new Error('Failed to delete task');
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
+
+  //console.log('task state in task comp is: ', tasks)
 
   return (
     <article className="taskBox" id={id}>
@@ -42,12 +61,15 @@ const Task = ({ content, state, setState, index, taskName, status, id, key2 }) =
             onChange={event => {
               setTaskTitle(event.target.value);
             }}
+            // on clickout
             onBlur={() => {
               setToggleTitle(true);
+              // put request to change title to what's in input field
             }}
             onKeyDown={event => {
               if (event.key === 'Enter' || event.key === 'Escape') {
                 setToggleTitle(true);
+                // put request to change title to what's in input field
                 event.preventDefault();
                 event.stopPropagation();
               }
@@ -90,11 +112,14 @@ const Task = ({ content, state, setState, index, taskName, status, id, key2 }) =
           onClick={() => {
             // set the new state with all items that do not use that specific ID
 
-            setUserTasks(userTasks.filter(el => el.key2 != key2));
+            handleDeleteTask()
 
-            console.log(`userTasksssssss`,userTasks);
+            // setUserTasks(userTasks.filter(el => el.taskID != taskID));
+
+            // console.log(`userTasksssssss`,userTasks);
 
           }}
+
           ><i class="fa fa-trash" style={{ fontSize: '1.5rem' }}></i></button>
 
       </div>
