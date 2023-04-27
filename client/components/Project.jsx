@@ -77,7 +77,7 @@ export const Project = ({ content, items, setItems, index, id }) => {
       </div>
           {/* delete button, it works! */}
       <div>
-        <button className='deleteButton'
+        <button className='deleteButtonP'
           onClick={deleteItem}
           ><i class="fa fa-trash" style={{ fontSize: '1.5rem' }}></i></button>
         {/* <button className='deleteButton'
