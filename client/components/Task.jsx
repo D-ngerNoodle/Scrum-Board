@@ -28,8 +28,11 @@ const Task = ({ content, state, setState, index, taskName, status, id, taskId}) 
     .then(response => {
       if (response.ok) {
         // remove the task from the tasks array
+        console.log('userTasks before: ', userTasks);
         const updatedTasks = userTasks.filter(user => user.id !== taskId);
+        console.log('updatedTasks: ', updatedTasks);
         setUserTasks(updatedTasks);
+        console.log('userTasks after: ', userTasks);
       } else {
         throw new Error('Failed to delete task');
       }

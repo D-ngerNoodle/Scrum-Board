@@ -3,8 +3,6 @@ import { ProjectContext } from './ProjectContext.jsx';
 // import './TaskContainer.css';
 import { Box } from "@material-ui/core";
 import TaskColumn from './TaskColumn.jsx';
-
-//import beautiful dnd
 import {
   DragDropContext,
   Droppable,
@@ -19,6 +17,8 @@ export const TaskContainer2 = () => {
   console.log(`TASKCONTAINER2 type:`, Array.isArray(userTasks));
 
 
+
+
   // initiate local state of array of task columns
   const [taskColArr, setTaskColArr] = useState([]);
   return (
@@ -28,7 +28,7 @@ export const TaskContainer2 = () => {
       {/* <dragdropcontext */}
 
       {/* <droppable */}
-
+      <DragDropContext>
       <div className='columns-container' > 
         <div id='col-1'>
           <TaskColumn status={1} {...{ taskColArr, setTaskColArr, }} name='NEW'/>
@@ -40,6 +40,7 @@ export const TaskContainer2 = () => {
           <TaskColumn status={3}  {...{ taskColArr, setTaskColArr, }} name='COMPLETED'/>
         </div>
       </div>
+      </DragDropContext>
     </div>
   );
 };

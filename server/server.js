@@ -222,6 +222,24 @@ app.delete('/tasks/:id', async (req, res) => {
   }
 });
 
+// Updates task status on drop
+app.put('/tasks/:id', async (req, res) => {
+  const id = req.params.id;
+  const newStatus = req.body.status;
+  try {
+    const result = await pool.query('UPDATE tasks SET status = $1 WHERE id = $2', [newStatus, id]);
+    if (result.rowCount === 0) {
+      res.status(404).send(`Task with ID ${id} not found`);
+    } else {
+      res.set('Access-Control-Allow-Origin', '*');
+      res.status(200).send();
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating task');
+  }
+})
+
 app.listen(3000, () => {
   console.log(`Server listening on port 3000`);
 });
