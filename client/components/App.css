@@ -4,15 +4,17 @@
 } */
 
 body {
+  margin-top: 1.5rem;;
   background-color: rgb(225, 237, 238);
 }
 
 /* index.js */
 .container {
   padding: 1rem;
-  border: 3px solid black;
+  border: 5px solid rgba(0, 0, 0, 0.623);
   border-radius: 15px;
   max-width: 980px;
+  max-height: 838px;
   margin: auto;
 
   display: grid;
@@ -28,12 +30,14 @@ body {
 }
 
 h1 {
+  border: solid rgba(0, 0, 0, 0.078) 3px;
+  background: rgb(222, 218, 222);
+  border-radius: 15px;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 3rem;
   width: 30rem;
-  color: rgba(78, 78, 78, 0.965);
+  color: rgba(114, 114, 114, 0.965);
   border-radius: 12px;
-  background-color: rgb(190, 190, 190);
   padding: 0.6rem 4.7rem 0.6rem 4.7rem;
   justify-content: center;
   text-align: center;
@@ -70,6 +74,7 @@ h1 {
 }
 
 /* TaskColumn.jsx */
+
 .columnStatus {
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.3rem;
@@ -87,6 +92,7 @@ h1 {
 }
 
 .column {
+  max-height: 47rem;
   margin: 5px;
   display: flex;
   flex-direction: column;
@@ -97,7 +103,7 @@ h1 {
 .taskBox {
   /* border: 1px solid black; */
   border: 3px solid rgba(0, 0, 0, 0.144);
-  border-radius: 6px;
+  border-radius: 12px;
   height: 95px;
   width: 180px;
   color: black;
@@ -111,19 +117,20 @@ h1 {
 }
 
 #taskStatus1 {
-  background-color: rgb(255, 234, 234);
+  background-color: rgb(255, 239, 239);
 }
 
 #taskStatus2 {
-  background-color: rgb(255, 254, 229);
+  background-color: rgb(255, 254, 239);
 }
 
 #taskStatus3 {
-  background-color: rgb(240, 255, 235);
+  background-color: rgb(244, 255, 240);
 }
 
 .content {
   /* overflow-wrap: break-word; */
+  color: rgba(0, 0, 0, 0.856);
   word-break: break-word;
   inline-size: 150px;
   max-height:100px;
@@ -139,13 +146,14 @@ h1 {
 /* ProjectContainer.jsx */ 
 
 .ProjectContainer {
-  /* border: 1rem solid; */
-  background: rgb(213, 208, 213);
+  border: solid rgba(0, 0, 0, 0.078) 3px;
+  background: rgb(222, 218, 222);
+  border-radius: 15px;
   height: 52rem; 
+  margin: 0 0.1rem 0 0.2rem;
 }
 
 .outer {
-    border: 1px solid black;
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -165,18 +173,22 @@ h1 {
     align-items: center;
     justify-content: center;
     align-content: center;
-    padding-block: 1rem;
+    padding-block: 1.4rem;
 }
 
 .image-container {
-    width: 80px;
-    height: 80px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     background-size: cover;
     background-position: center;
     background: whitesmoke;
-    border: 3px solid black;
-    margin-bottom: 1rem;
+    border: 3px solid rgba(0, 0, 0, 0.317);
+    margin-bottom: 0.5rem;
+}
+
+.Username {
+  font-size: 1.3rem;
 }
 
 .form {
@@ -227,6 +239,8 @@ h1 {
 
 /* Global */
 .deleteButtonP {
+  position: relative;
+  right: 15px;
   cursor: pointer;
   border: 0px;
   color: rgba(0, 0, 0, 0.488);
@@ -243,12 +257,12 @@ h1 {
   left: 156px;
   cursor: pointer;
   border: 0px;
-  color: rgba(0, 0, 0, 0.609);
+  color: rgba(0, 0, 0, 0.488);
   background-color: rgba(255, 0, 0, 0.0);
 }
 
 /* change color on mouse-over */
 .deleteButtonT:hover {
-  color: rgba(0, 0, 0, 0.801);
+  color: rgb(0, 0, 0);
 }
 

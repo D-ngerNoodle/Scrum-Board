@@ -30,7 +30,7 @@ const TaskColumn = ({ taskInfo, id, name, status}) => {
       // if the current task status is equal to the specific column status
       // push it to the current column
       if(userTasks[i].status === status){
-      taskList.push(<Task taskName={userTasks[i].task_name} status={userTasks[i].status} tasks={userTasks} setTasks={setTasks} key={i} />)
+        taskList.push(<Task taskName={userTasks[i].task_name} status={userTasks[i].status} id={`taskStatus${userTasks[i].status}`} key={i} />);
       };
 
     }
