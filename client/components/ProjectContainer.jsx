@@ -75,12 +75,13 @@ export const ProjectContainer = () => {
   const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
     userSelect: 'none',
-    padding: grid * 1,
+    padding: grid * 2,
     margin: `0 0 ${grid}px 0`,
     display: 'flex',
     justifyContent: 'space-between',
-    border: 'solid black 1px',
+    border: 'solid rgba(0, 0, 0, 0.228) 3px',
     borderRadius: '6px',
+    color: 'rgba(0, 0, 0, 0.756)',
     // alignItems: 'center',
 
     // change background colour if dragging
@@ -167,7 +168,7 @@ export const ProjectContainer = () => {
               id="image-container"
               className='image-container'
             ></div>
-            <div>User</div>
+            <div className='Username'>User</div>
             <form className='form'>
               <input
                 type="file"
