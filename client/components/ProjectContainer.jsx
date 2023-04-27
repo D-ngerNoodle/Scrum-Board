@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { ProjectContext } from './ProjectContext.jsx';
+import Button from '@mui/material/Button';
 import { Project } from './Project.jsx';
 import {
   DragDropContext,
@@ -85,7 +86,7 @@ export const ProjectContainer = () => {
     // alignItems: 'center',
 
     // change background colour if dragging
-    background: isDragging ? '#EBC1EE' : 'whitesmoke',
+    background: isDragging ? '#c1b9c1' : 'whitesmoke',
 
     // styles we need to apply on draggables
     ...draggableStyle,
@@ -249,12 +250,22 @@ export const ProjectContainer = () => {
             {/* {arrContainer} */}
           </DragDropContext>
         </div>
-        <button
-          className='newProjectBtn'
+        <Button 
+          className='MUIBUTTON'
+          variant="contained" 
+          sx={{ m: 1.5,
+          boxShadow: 3,
+          fontSize: 20, 
+          background: '#6597a8f6',
+          ":hover": {
+            bgcolor: "#577f8df6",
+          }}}
+          style={{
+            width: '190px',
+            fontSize: '14px'
+          }}
           onClick={handleAddProject}
-        >
-          New Project
-        </button>
+        >New Project</Button>
       </div>
     </div>
   );
