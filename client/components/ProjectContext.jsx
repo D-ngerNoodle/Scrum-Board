@@ -67,7 +67,7 @@ const ProjectContextProvider = ({ children }) => {
   }, [renderState]);
 
   return (
-    <ProjectContext.Provider value={{ userProjects, userTasks, renderState, setRenderState }}>
+    <ProjectContext.Provider value={{ userProjects, userTasks, setUserTasks, renderState, setRenderState }}>
       {children}
     </ProjectContext.Provider>
   );

@@ -9,7 +9,7 @@ import Task from './Task.jsx';
 // } from 'react-beautiful-dnd';
 
 
-const TaskColumn = ({ taskInfo, id, name, status}) => {
+const TaskColumn = ({ taskInfo, name, status}) => {
   //create local state for number of tasks
   const { userTasks } = useContext(ProjectContext);
   const [tasks, setTasks] = useState([]);
@@ -18,7 +18,7 @@ const TaskColumn = ({ taskInfo, id, name, status}) => {
   //function to create a task when the new task button is clicked
   const taskCreator = () => {
     setTasks(
-      tasks.concat(<Task taskInfo={taskInfo} tasks={userTasks} setTasks={setTasks} key={tasks.length} />)
+      tasks.concat(<Task taskInfo={taskInfo} status={status} key={tasks.length} key2={tasks.length} />)
     );
     // console.log('tasks is ', tasks);
   };
@@ -30,7 +30,9 @@ const TaskColumn = ({ taskInfo, id, name, status}) => {
       // if the current task status is equal to the specific column status
       // push it to the current column
       if(userTasks[i].status === status){
-      taskList.push(<Task taskName={userTasks[i].task_name} status={userTasks[i].status} tasks={userTasks} setTasks={setTasks} key={i} />)
+        taskList.push(<Task taskName={userTasks[i].task_name} status={userTasks[i].status} id={`taskStatus${userTasks[i].status}`} key={i} 
+        key2={i}
+        />);
       };
 
     }

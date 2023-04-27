@@ -8,8 +8,10 @@ import {
 
 //this is the doubleclick/deletebutton
 
-const Task = ({ content, state, setState, key, index, taskName, status, tasks, setTasks, id }) => {
+const Task = ({ content, state, setState, index, taskName, status, id, key2 }) => {
+  const { userTasks, setUserTasks } = useContext(ProjectContext);
 
+  console.log(`keys are here `, key2)
   // hooks for title text edit field
   const [toggleTitle, setToggleTitle] = useState(true);
   const [taskTitle = 'title', setTaskTitle] = useState(taskName);
@@ -18,7 +20,7 @@ const Task = ({ content, state, setState, key, index, taskName, status, tasks, s
   //const [toggleBody, setToggleBody] = useState(true);
   //const [taskBody, setTaskBody] = useState('Body');
 
-  console.log('task state in task comp is: ', tasks)
+  // console.log('task state in task comp is: ', tasks)
 
   return (
     <article className="taskBox" id={id}>
@@ -87,14 +89,10 @@ const Task = ({ content, state, setState, key, index, taskName, status, tasks, s
       <button className='deleteButtonT'
           onClick={() => {
             // set the new state with all items that do not use that specific ID
-            
-            const holder = tasks.filter(el => el.id != id);
-            const newArr =[];
 
-            for(let i = 0; i < holder; i++){
-              newArr.push(<Task taskName={holder[i].task_name} status={holder[i].status} tasks={holder} setTasks={setTasks} />)
-            }
-            setTasks(newArr);
+            setUserTasks(userTasks.filter(el => el.key2 != key2));
+
+            console.log(`userTasksssssss`,userTasks);
 
           }}
           ><i class="fa fa-trash" style={{ fontSize: '1.5rem' }}></i></button>
