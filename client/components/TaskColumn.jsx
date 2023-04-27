@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-// import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import { ProjectContext } from './ProjectContext.jsx';
 import Task from './Task.jsx';
 // import {
@@ -98,16 +98,23 @@ const TaskColumn = ({ taskInfo, name, status}) => {
       </div>
 
       <div>
-        <button onClick={taskCreator}>New Task</button>
-        {/* <Button variant="contained" 
-                sx={{ m: 1.5,
-                  boxShadow: 1,
-                  fontSize: 20, 
-                  background: '#6a8f8b',
-                  ":hover": {
-                    bgcolor: "#4b6260",
-                  }}}
-                onClick={taskCreator}>New Task</Button> */}
+        {/* <button onClick={taskCreator}>New Task</button> */}
+        <Button 
+          className='MUIBUTTON'
+          variant="contained" 
+          sx={{ m: 1.5,
+          boxShadow: 3,
+          fontSize: 20, 
+          background: '#6597a8f6',
+          ":hover": {
+            bgcolor: "#577f8df6",
+          }}}
+          style={{
+            width: '120px',
+            fontSize: '13px'
+          }}
+          onClick={taskCreator}
+        >New Task</Button>
       </div>
     </div>
   );
