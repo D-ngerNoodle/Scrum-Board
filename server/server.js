@@ -11,6 +11,11 @@ const pool = new Pool({
   connectionString,
 });
 
+// removes unique restraint on the name column in projects table
+
+pool.connect();
+
+// 
 
 // Body parser middleware
 app.use(express.json());
@@ -102,10 +107,10 @@ app.get('/projects/:id', (req, res) => {
 // Add new task
 // Req body should include project_id and task name
 app.post('/tasks', (req, res) => {
-  const { project_id, name } = req.body;
+  const { project_id, name , status} = req.body;
   pool.query(
-    'INSERT INTO tasks (project_id, task_name) VALUES ($1, $2)',
-    [project_id, name],
+    'INSERT INTO tasks (project_id, task_name, status) VALUES ($1, $2, $3)',
+    [project_id, name, status],
     (error, results) => {
       if (error) {
         console.log('couldnt add task');
