@@ -11,6 +11,11 @@ const pool = new Pool({
   connectionString,
 });
 
+// removes unique restraint on the name column in projects table
+
+pool.connect();
+
+// 
 
 // Body parser middleware
 app.use(express.json());
