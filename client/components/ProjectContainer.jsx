@@ -20,7 +20,7 @@ export const ProjectContainer = () => {
   ];
 
   // check to see if props are being console logged
-  console.log('userProjects: ', userProjects, 'userTasks: ', userTasks);
+ //console.log('userProjects: ', userProjects, 'userTasks: ', userTasks);
 
   /* example
   userrProjects = [
@@ -42,7 +42,7 @@ export const ProjectContainer = () => {
       content: project.name,
     }));
     // result = {id: , content: }
-    console.log('this is result in initialize arr: ', result);
+   // console.log('this is result in initialize arr: ', result);
     return result;
   };
 
@@ -56,7 +56,7 @@ export const ProjectContainer = () => {
     const result = initializeArr();
     setItems(result);
   }, [userProjects]);
-  console.log('this is the item in items: ', items);
+  //console.log('this is the item in items: ', items);
 
 
   // helper function to reorder the result
@@ -100,7 +100,7 @@ export const ProjectContainer = () => {
   // the list of projects
   // const [items, setItems] = useState(getItems());
 
-  console.log('items: ', items);
+  //console.log('items: ', items);
 
   //this updates the project array based on where the item was dropped in the UI
   function onDragEnd(result) {
