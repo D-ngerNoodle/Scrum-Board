@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { ProjectContext } from './ProjectContext.jsx';
-import './TaskContainer.css';
+// import './TaskContainer.css';
 import { Box } from "@material-ui/core";
 import TaskColumn from './TaskColumn.jsx';
-//import Task from './Task.jsx';
 
 export const TaskContainer2 = () => {
   // import userTasks from project context
@@ -16,25 +15,18 @@ export const TaskContainer2 = () => {
   // initiate local state of array of task columns
   const [taskColArr, setTaskColArr] = useState([]);
   return (
-    // style={{display: flex, flex-direction
-    <div className='columns-container' > 
-      <div id='col-1'>
-        <div className="columns-title">
-          New
+    <div className='TaskContainer'>
+      <h1>Current Project</h1>
+      <div className='columns-container' > 
+        <div id='col-1'>
+          <TaskColumn status={1} {...{ taskColArr, setTaskColArr, }} name='NEW'/>
         </div>
-        <TaskColumn status={1} {...{ taskColArr, setTaskColArr, }}/>
-      </div>
-      <div id='col-2'>
-        <div className="columns-title">
-          In Progress
+        <div id='col-2'>
+          <TaskColumn status={2} {...{ taskColArr, setTaskColArr, }} name='IN PROGRESS'/>
         </div>
-        <TaskColumn status={2} {...{ taskColArr, setTaskColArr, }}/>
-      </div>
-      <div id='col-3'>
-        <div className="columns-title">
-          Completed
+        <div id='col-3'>
+          <TaskColumn status={3}  {...{ taskColArr, setTaskColArr, }} name='COMPLETED'/>
         </div>
-        <TaskColumn status={3}  {...{ taskColArr, setTaskColArr, }}/>
       </div>
     </div>
   );

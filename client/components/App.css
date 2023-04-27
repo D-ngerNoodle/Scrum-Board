@@ -4,37 +4,44 @@
 } */
 
 body {
-  background-color: rgb(76, 72, 87);
+  background-color: rgb(225, 237, 238);
 }
 
 /* index.js */
 .container {
+  padding: 1rem;
+  border: 3px solid black;
+  border-radius: 15px;
   max-width: 980px;
   margin: auto;
 
-  
   display: grid;
   grid-template-columns: 1fr 5fr;
 }
 
 /* TaskContainer.jsx */
+
 .TaskContainer {
-  background: rgb(76, 72, 87);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+h1 {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 3rem;
+  width: 30rem;
+  color: rgba(78, 78, 78, 0.965);
+  border-radius: 12px;
+  background-color: rgb(190, 190, 190);
+  padding: 0.6rem 4.7rem 0.6rem 4.7rem;
+  justify-content: center;
+  text-align: center;
+} 
 
 .taskColumns-container {
   display: grid;
   grid-template-rows: 100px 100px 1fr;
-}
-
-.currentProject {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: rgba(255, 255, 255, 0.929);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 4rem;
-  font-weight: bold;
 }
 
 .colunmNamesRow {
@@ -44,6 +51,7 @@ body {
   font-size: 2rem;
   padding-block: 1rem;
 }
+
 .columns-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -61,18 +69,14 @@ body {
   margin-top: 2rem;
 }
 
-#col-1 {
-  border: 2px solid green;
-}
-
-#col-2 {
-  border: 2px solid orange;
-}
-#col-3 {
-  border: 2px solid pink;
-}
-
 /* TaskColumn.jsx */
+.columnStatus {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.3rem;
+  color: rgba(91, 91, 91, 0.965);
+  border-bottom: 2px solid rgb(164, 164, 164);
+}
+
 .tasksBox {
   max-height: 400; 
   overflow-y: auto;
@@ -83,6 +87,7 @@ body {
 }
 
 .column {
+  margin: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,18 +95,41 @@ body {
 
 /* Tasks.jsx */
 .taskBox {
-  height: 110px;
-  width: 150px;
+  /* border: 1px solid black; */
+  border: 3px solid rgba(0, 0, 0, 0.144);
+  border-radius: 6px;
+  height: 95px;
+  width: 180px;
   color: black;
-  background: #cecece;
+  background: #fff7fb;
   padding: 0.5rem;
-  margin: 0.2rem;
+  margin-top: 0.3rem;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
   display: flex;
   flex-direction: column;
 }
 
+#taskStatus1 {
+  background-color: rgb(255, 234, 234);
+}
+
+#taskStatus2 {
+  background-color: rgb(255, 254, 229);
+}
+
+#taskStatus3 {
+  background-color: rgb(240, 255, 235);
+}
+
 .content {
-  margin-bottom: 1rem;
+  /* overflow-wrap: break-word; */
+  word-break: break-word;
+  inline-size: 150px;
+  max-height:100px;
+  height: 100px;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 
 .btn-container {
@@ -109,10 +137,11 @@ body {
   align-items: end;
 }
 /* ProjectContainer.jsx */ 
+
 .ProjectContainer {
   /* border: 1rem solid; */
-  background: rgb(76, 72, 87);
-  height: 75vh 
+  background: rgb(213, 208, 213);
+  height: 52rem; 
 }
 
 .outer {
@@ -131,7 +160,6 @@ body {
 .topLeftContainer {
     flex: 1;
     height: 100%;
-    border: 3px solid red;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -198,13 +226,29 @@ body {
 }
 
 /* Global */
-.deleteButton {
+.deleteButtonP {
   cursor: pointer;
   border: 0px;
+  color: rgba(0, 0, 0, 0.488);
   background-color: rgba(255, 0, 0, 0.0);
 }
 
 /* change color on mouse-over */
-.deleteButton:hover {
-  color: rgb(127, 135, 156);
+.deleteButtonP:hover {
+  color: rgb(0, 0, 0);
 }
+
+.deleteButtonT {
+  position: relative;
+  left: 156px;
+  cursor: pointer;
+  border: 0px;
+  color: rgba(0, 0, 0, 0.609);
+  background-color: rgba(255, 0, 0, 0.0);
+}
+
+/* change color on mouse-over */
+.deleteButtonT:hover {
+  color: rgba(0, 0, 0, 0.801);
+}
+
