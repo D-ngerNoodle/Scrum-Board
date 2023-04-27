@@ -18,6 +18,26 @@ const Task = ({ content, state, setState, key, index, taskName, status, tasks, s
   //const [toggleBody, setToggleBody] = useState(true);
   //const [taskBody, setTaskBody] = useState('Body');
 
+  // handle delete task
+  function handleDeleteTask () {
+    fetch(`http://localhost:3000/tasks/${id}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        // remove the task from the tasks array
+        const updatedTasks = tasks.filter(task => task.id !== id);
+        setTasks(updatedTasks);
+      } else {
+        throw new Error('Failed to delete task');
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
+
+
   console.log('task state in task comp is: ', tasks)
 
   return (
@@ -85,18 +105,19 @@ const Task = ({ content, state, setState, key, index, taskName, status, tasks, s
       </div>
       <div className="btn-container">
       <button className='deleteButtonT'
-          onClick={() => {
-            // set the new state with all items that do not use that specific ID
+          onClick={
+            // () => {
+          //   // set the new state with all items that do not use that specific ID
             
-            const holder = tasks.filter(el => el.id != id);
-            const newArr =[];
+          //   const holder = tasks.filter(el => el.id != id);
+          //   const newArr =[];
 
-            for(let i = 0; i < holder; i++){
-              newArr.push(<Task taskName={holder[i].task_name} status={holder[i].status} tasks={holder} setTasks={setTasks} />)
-            }
-            setTasks(newArr);
-
-          }}
+          //   for(let i = 0; i < holder; i++){
+          //     newArr.push(<Task taskName={holder[i].task_name} status={holder[i].status} tasks={holder} setTasks={setTasks} />)
+          //   }
+          //   setTasks(newArr);
+          //}}
+          handleDeleteTask}
           ><i class="fa fa-trash" style={{ fontSize: '1.5rem' }}></i></button>
 
       </div>
