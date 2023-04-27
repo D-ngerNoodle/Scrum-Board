@@ -8,7 +8,11 @@ import {
 
 //this is the doubleclick/deletebutton
 
+<<<<<<< HEAD
 const Task = ({ content, state, setState, key, index, taskName, status, tasks, setTasks, id }) => {
+=======
+const Task = ({ content, state, setState, ind, index, taskName, status, id }) => {
+>>>>>>> dev
   // hooks for title text edit field
   const [toggleTitle, setToggleTitle] = useState(true);
   const [taskTitle = 'title', setTaskTitle] = useState(taskName);
@@ -20,7 +24,11 @@ const Task = ({ content, state, setState, key, index, taskName, status, tasks, s
   console.log('task state in task comp is: ', tasks)
 
   return (
+<<<<<<< HEAD
     <article className="taskBox">
+=======
+    <article className="taskBox" id={id}>
+>>>>>>> dev
       <div className="content">
         {/* click to edit field for task title */}
         {toggleTitle ? (
@@ -34,6 +42,7 @@ const Task = ({ content, state, setState, key, index, taskName, status, tasks, s
         ) : (
           <input
             type="text"
+            maxLength="70"
             value={taskTitle}
             onChange={event => {
               setTaskTitle(event.target.value);
@@ -50,6 +59,7 @@ const Task = ({ content, state, setState, key, index, taskName, status, tasks, s
             }}
           />
         )}
+<<<<<<< HEAD
 
         {/* click to edit field for task body */}
         {/* {toggleBody ? (
@@ -79,9 +89,11 @@ const Task = ({ content, state, setState, key, index, taskName, status, tasks, s
             }}
           />
         )} */}
+=======
+>>>>>>> dev
       </div>
       <div className="btn-container">
-      <button className='deleteButton'
+      <button className='deleteButtonT'
           onClick={() => {
             // set the new state with all items that do not use that specific ID
             
