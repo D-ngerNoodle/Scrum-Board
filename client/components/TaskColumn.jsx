@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 // import Button from '@mui/material/Button';
 import { ProjectContext } from './ProjectContext.jsx';
 import Task from './Task.jsx';
-import './TaskColumn.css';
 import {
   DragDropContext,
   Droppable,

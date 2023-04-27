@@ -11,6 +11,19 @@ const pool = new Pool({
   connectionString,
 });
 
+// removes unique restraint on the name column in projects table
+
+pool.connect();
+
+const query = `SELECT conname FROM pg_constraint WHERE conrelid = 'projects'::regclass AND conname LIKE '%name_key%';`;
+
+pool.query(query, (err, res) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log(res.rows);
+  }
+});
 
 // Body parser middleware
 app.use(express.json());
