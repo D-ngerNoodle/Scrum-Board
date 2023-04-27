@@ -62,6 +62,7 @@ export const ProjectContainer = () => {
   // helper function to reorder the result
   //this is used in the drag n drop feature
   const reorder = (list, startIndex, endIndex) => {
+    console.log(`start:  ${startIndex}, end:  ${endIndex}`);
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
@@ -130,7 +131,7 @@ export const ProjectContainer = () => {
         },
         body: JSON.stringify({
           "user_id": "5",
-          "name": `Project ${items.length + 1}`
+          "name": `New Project ${items.length + 1}`
         })
       });
       if (response.ok) {
