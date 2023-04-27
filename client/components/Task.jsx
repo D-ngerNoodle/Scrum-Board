@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 //this is the doubleclick/deletebutton
 
-const Task = ({ content, state, setState, ind, index, taskName, status }) => {
+const Task = ({ content, state, setState, ind, index, taskName, status, id }) => {
   // hooks for title text edit field
   const [toggleTitle, setToggleTitle] = useState(true);
   const [taskTitle, setTaskTitle] = useState(taskName);
@@ -11,8 +11,8 @@ const Task = ({ content, state, setState, ind, index, taskName, status }) => {
   const [taskBody, setTaskBody] = useState('Body');
 
   return (
-    <article className="taskBox@">
-      <div className="content@">
+    <article className="taskBox" id={id}>
+      <div className="content">
         {/* click to edit field for task title */}
         {toggleTitle ? (
           <p
@@ -25,6 +25,7 @@ const Task = ({ content, state, setState, ind, index, taskName, status }) => {
         ) : (
           <input
             type="text"
+            maxLength="70"
             value={taskTitle}
             onChange={event => {
               setTaskTitle(event.target.value);
@@ -41,38 +42,9 @@ const Task = ({ content, state, setState, ind, index, taskName, status }) => {
             }}
           />
         )}
-
-        {/* click to edit field for task body */}
-        {toggleBody ? (
-          <p
-            onDoubleClick={() => {
-              setToggleBody(false);
-            }}
-          >
-            {taskBody}
-          </p>
-        ) : (
-          <input
-            type="text"
-            value={taskBody}
-            onChange={event => {
-              setTaskBody(event.target.value);
-            }}
-            onBlur={() => {
-              setToggleBody(true);
-            }}
-            onKeyDown={event => {
-              if (event.key === 'Enter' || event.key === 'Escape') {
-                setToggleBody(true);
-                event.preventDefault();
-                event.stopPropagation();
-              }
-            }}
-          />
-        )}
       </div>
       <div className="btn-container">
-      <button className='deleteButton'
+      <button className='deleteButtonT'
           onClick={() => {
             setItems(items.filter(el => el.id != id));
           }}

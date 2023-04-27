@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 // import Button from '@mui/material/Button';
 import { ProjectContext } from './ProjectContext.jsx';
 import Task from './Task.jsx';
-import './TaskColumn.css';
 import {
   DragDropContext,
   Droppable,
@@ -27,7 +26,7 @@ const TaskColumn = ({ taskInfo, id, name }) => {
   const taskRender = () => {
     const taskList = [];
     for(let i = 0; i < userTasks.length; i++){
-      taskList.push(<Task taskName={userTasks[i].task_name} status={userTasks[i].status} key={i} />);
+      taskList.push(<Task taskName={userTasks[i].task_name} status={userTasks[i].status} id={`taskStatus${userTasks[i].status}`} key={i} />);
     }
   
     setTasks(taskList);
@@ -41,8 +40,8 @@ const TaskColumn = ({ taskInfo, id, name }) => {
 
   // console.log('tasks is ', tasks);
   return (
-    <div className="@column">
-      <div>{name}</div>
+    <div className="column">
+      <div className='columnStatus'>{name}</div>
       <div className="tasksBox">
         {tasks}
       </div>
