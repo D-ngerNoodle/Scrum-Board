@@ -8,11 +8,8 @@ import {
 
 //this is the doubleclick/deletebutton
 
-<<<<<<< HEAD
 const Task = ({ content, state, setState, key, index, taskName, status, tasks, setTasks, id }) => {
-=======
-const Task = ({ content, state, setState, ind, index, taskName, status, id }) => {
->>>>>>> dev
+
   // hooks for title text edit field
   const [toggleTitle, setToggleTitle] = useState(true);
   const [taskTitle = 'title', setTaskTitle] = useState(taskName);
@@ -24,11 +21,7 @@ const Task = ({ content, state, setState, ind, index, taskName, status, id }) =>
   console.log('task state in task comp is: ', tasks)
 
   return (
-<<<<<<< HEAD
-    <article className="taskBox">
-=======
     <article className="taskBox" id={id}>
->>>>>>> dev
       <div className="content">
         {/* click to edit field for task title */}
         {toggleTitle ? (
@@ -59,7 +52,6 @@ const Task = ({ content, state, setState, ind, index, taskName, status, id }) =>
             }}
           />
         )}
-<<<<<<< HEAD
 
         {/* click to edit field for task body */}
         {/* {toggleBody ? (
@@ -89,8 +81,7 @@ const Task = ({ content, state, setState, ind, index, taskName, status, id }) =>
             }}
           />
         )} */}
-=======
->>>>>>> dev
+
       </div>
       <div className="btn-container">
       <button className='deleteButtonT'
