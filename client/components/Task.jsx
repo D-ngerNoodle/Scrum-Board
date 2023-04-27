@@ -39,6 +39,24 @@ const Task = ({ content, state, setState, index, taskName, status, id, taskId}) 
     });
   }
 
+ // handle task name change
+ const updateTaskName = async () => {
+  try {
+    const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: taskId, name: taskTitle }),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to update item in database');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   //console.log('task state in task comp is: ', tasks)
 
   return (
@@ -65,6 +83,7 @@ const Task = ({ content, state, setState, index, taskName, status, id, taskId}) 
             onBlur={() => {
               setToggleTitle(true);
               // put request to change title to what's in input field
+              updateTaskName();
             }}
             onKeyDown={event => {
               if (event.key === 'Enter' || event.key === 'Escape') {
@@ -72,6 +91,7 @@ const Task = ({ content, state, setState, index, taskName, status, id, taskId}) 
                 // put request to change title to what's in input field
                 event.preventDefault();
                 event.stopPropagation();
+                updateTaskName();
               }
             }}
           />
