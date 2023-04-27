@@ -4,6 +4,13 @@ import { ProjectContext } from './ProjectContext.jsx';
 import { Box } from "@material-ui/core";
 import TaskColumn from './TaskColumn.jsx';
 
+//import beautiful dnd
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+} from 'react-beautiful-dnd';
+
 export const TaskContainer2 = () => {
   // import userTasks from project context
   const { userTasks } = useContext(ProjectContext);
@@ -17,6 +24,11 @@ export const TaskContainer2 = () => {
   return (
     <div className='TaskContainer'>
       <h1>Current Project</h1>
+
+      {/* <dragdropcontext */}
+
+      {/* <droppable */}
+
       <div className='columns-container' > 
         <div id='col-1'>
           <TaskColumn status={1} {...{ taskColArr, setTaskColArr, }} name='NEW'/>

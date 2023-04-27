@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import Button from '@mui/material/Button';
 import { ProjectContext } from './ProjectContext.jsx';
 import Task from './Task.jsx';
-// import {
-//   DragDropContext,
-//   Droppable,
-//   Draggable,
-// } from 'react-beautiful-dnd';
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+} from 'react-beautiful-dnd';
 
 
 const TaskColumn = ({ taskInfo, name, status}) => {

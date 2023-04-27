@@ -172,9 +172,8 @@ app.put('/projects/:id', async (req, res) => {
 app.put('/tasks/:id', async (req, res) => {
   const id = req.params.id;
   const newName = req.body.name;
-  const newBody = req.body.body
   try {
-    const result = await pool.query('UPDATE tasks SET task_name = $1, description = $2 WHERE id = $2', [newName, newBody, id]);
+    const result = await pool.query('UPDATE tasks SET task_name = $1 WHERE id = $2', [newName, id]);
     if (result.rowCount === 0) {
       res.status(404).send(`Task with ID ${id} not found`);
     } else {
